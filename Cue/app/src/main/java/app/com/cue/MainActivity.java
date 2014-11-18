@@ -14,10 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -99,12 +98,14 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * Builds a Glass styled "Hello World!" view using the {@link com.google.android.glass.widget.CardBuilder} class.
+     * What cue is this card.
      */
+
     private View buildView() {
         CardBuilder card = new CardBuilder(this, CardBuilder.Layout.TEXT);
 
         double q = 10.10;
+        
         card.setText("This is cue: \n\n" + "              " + q);
         // card.setText(R.string.insert_number);
         return card.getView();
