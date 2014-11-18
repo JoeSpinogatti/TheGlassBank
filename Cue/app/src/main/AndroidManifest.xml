@@ -20,5 +20,5 @@
                 android:resource="@xml/voice_trigger" />
         </activity>
     </application>
-
+<uses-permission android:name="com.google.android.glass.permission.DEVELOPMENT" />
 </manifest>

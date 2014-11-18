@@ -5,4 +5,5 @@
     <string name="title_activity_main">Cue Immersion</string>
     <string name="in_cue">This is cue:</string>
     <string name="insert_number">Insert Cue Number</string>
+    <string name="glass_voice_trigger">what cue are we in</string>
 </resources>
