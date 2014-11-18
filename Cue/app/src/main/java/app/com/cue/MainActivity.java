@@ -9,16 +9,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import java.io.IOException;
-import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * An {@link Activity} showing a tuggable "Hello World!" card.
@@ -98,33 +99,13 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * Builds a Glass styled "Hello World!" view using the {@link CardBuilder} class.
+     * Builds a Glass styled "Hello World!" view using the {@link com.google.android.glass.widget.CardBuilder} class.
      */
     private View buildView() {
         CardBuilder card = new CardBuilder(this, CardBuilder.Layout.TEXT);
 
-        InputStream is = getResources().openRawResource(R.raw.q);
-        InputStreamReader inputStreamReader = new InputStreamReader(is);
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-        try {
-            String inputLine;
-
-            while ((inputLine = bufferedReader.readLine()) !=null) {
-                double x = Double.parseDouble(inputLine);
-                card.setText("This is cue: \n\n" + "             " + x);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (bufferedReader != null) {
-                    bufferedReader.close();
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
+        double q = 10.10;
+        card.setText("This is cue: \n\n" + "              " + q);
         // card.setText(R.string.insert_number);
         return card.getView();
     }
