@@ -116,12 +116,14 @@ public class MainActivity extends Activity {
             conexion.connect();
             int lenghtOfFile = conexion.getContentLength();
             InputStream is = url.openStream();
-            //File testDirectory = new File(
-                    //Environment.getExternalStorageDirectory() + File.separator + "/Download");
-            //if (!testDirectory.exists()) {
-              //  testDirectory.mkdir();
-            //}
-            FileOutputStream fos = new FileOutputStream(Environment.getExternalStorageDirectory() + File.separator + "/Download"+ "/q.txt");
+            File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Test");
+            if (!mediaStorageDir.exists()) {
+                if (!mediaStorageDir.mkdirs()) {
+                    return null;
+                }
+            }
+            FileOutputStream fos = new FileOutputStream(mediaStorageDir
+                    + "/q.txt");
             byte data[] = new byte[1024];
             long total = 0;
             int progress = 0;
@@ -143,10 +145,10 @@ public class MainActivity extends Activity {
 
         //Find the directory for the SD Card using the API
 
-        String sdcard = Environment.getExternalStorageDirectory() + File.separator + "/Download";
+        File sdcard = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
 
 //Get the text file
-        File file = new File(sdcard, "q.txt");
+        File file = new File(sdcard,"q.txt");
 
 //Read text from file
         StringBuilder text = new StringBuilder();
@@ -165,7 +167,9 @@ public class MainActivity extends Activity {
             //You'll need to add proper error handling here
         }
 
-        card.setText("This is cue: \n\n" + "              " + text);
+        String cueNumber = text.toString();
+
+        card.setText("This is cue: \n\n" + "              " + cueNumber);
         // card.setText(R.string.insert_number);
         return card.getView();
     }
