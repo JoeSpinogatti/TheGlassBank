@@ -116,13 +116,12 @@ public class MainActivity extends Activity {
             conexion.connect();
             int lenghtOfFile = conexion.getContentLength();
             InputStream is = url.openStream();
-            File testDirectory = new File(
-                    Environment.getExternalStorageDirectory() + "/Download");
-            if (!testDirectory.exists()) {
-                testDirectory.mkdir();
-            }
-            FileOutputStream fos = new FileOutputStream(testDirectory
-                    + "/q.txt");
+            //File testDirectory = new File(
+                    //Environment.getExternalStorageDirectory() + File.separator + "/Download");
+            //if (!testDirectory.exists()) {
+              //  testDirectory.mkdir();
+            //}
+            FileOutputStream fos = new FileOutputStream(Environment.getExternalStorageDirectory() + File.separator + "/Download"+ "/q.txt");
             byte data[] = new byte[1024];
             long total = 0;
             int progress = 0;
@@ -144,10 +143,10 @@ public class MainActivity extends Activity {
 
         //Find the directory for the SD Card using the API
 
-        File sdcard = Environment.getExternalStorageDirectory();
+        String sdcard = Environment.getExternalStorageDirectory() + File.separator + "/Download";
 
 //Get the text file
-        File file = new File(sdcard,"q.txt");
+        File file = new File(sdcard, "q.txt");
 
 //Read text from file
         StringBuilder text = new StringBuilder();
