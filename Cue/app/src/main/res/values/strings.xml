@@ -3,6 +3,6 @@
 
     <string name="app_name">Cue</string>
     <string name="title_activity_main">Cue Immersion</string>
-    <string name="in_cue">We are in cue: </string>
-
+    <string name="in_cue">This is cue:</string>
+    <string name="insert_number">Insert Cue Number</string>
 </resources>
