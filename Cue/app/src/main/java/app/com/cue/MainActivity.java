@@ -96,7 +96,9 @@ public class MainActivity extends Activity {
     private View buildView() {
         CardBuilder card = new CardBuilder(this, CardBuilder.Layout.TEXT);
 
-        card.setText(R.string.in_cue);
+        double x = 4.678;
+
+        card.setText("This is cue: \n\n" + "             " + x);
         // card.setText(R.string.insert_number);
         return card.getView();
     }
