@@ -10,20 +10,20 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
 
-import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.google.gson.Gson;
+
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
+
 
 /**
  * An {@link Activity} showing a tuggable "Hello World!" card.
@@ -35,7 +35,11 @@ import java.net.URLConnection;
  *
  * @see <a href="https://developers.google.com/glass/develop/gdk/touch">GDK Developer Guide</a>
  */
+
+
 public class MainActivity extends Activity {
+
+
 
     /**
      * {@link CardScrollView} to use as the main content view.
@@ -50,6 +54,23 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+
+        String json = "";
+
+
+        try {
+            json = readUrl("http://joespinogatti.com/cuejson/q.json");
+            System.out.println("HELLO");
+            // Gson gson = new Gson();
+            System.out.println(json);
+            // cue cue = gson.fromJson(json, cue.class);
+
+            // System.out.println("Hello");
+            //System.out.println(json);
+            //System.out.println(cue.cue);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         mView = buildView();
 
@@ -106,69 +127,58 @@ public class MainActivity extends Activity {
      * What cue is this card.
      */
 
+    //JSON Parser
+
+    private String readUrl(String urlString) throws Exception {
+        BufferedReader reader = null;
+        try {
+            URL url = new URL(urlString);
+            reader = new BufferedReader(new InputStreamReader(url.openStream()));
+            StringBuffer buffer = new StringBuffer();
+            int read;
+            char[] chars = new char[1024];
+            while ((read = reader.read(chars)) != -1)
+                buffer.append(chars, 0, read);
+             System.out.print(buffer.toString());
+            return buffer.toString();
+        } finally {
+            if (reader != null)
+                reader.close();
+        }
+    }
+
+    private String readUrl1(String urlString){
+        URL url;
+        String inputLine;
+        String json = "";
+
+        try{
+            url = new URL(urlString);
+            URLConnection conn = url.openConnection();
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+            while((inputLine = in.readLine()) != null){
+                json += inputLine;
+            }
+        }
+        catch(MalformedURLException ex){
+            ex.printStackTrace();
+        }
+        catch(IOException ex){
+            ex.printStackTrace();
+        }
+        return json;
+    }
+
     private View buildView() {
         CardBuilder card = new CardBuilder(this, CardBuilder.Layout.TEXT);
 
-        int count;
-        try {
-            URL url = new URL("http://joespinogatti.com/cuetxt/q.txt");
-            URLConnection conexion = url.openConnection();
-            conexion.connect();
-            int lenghtOfFile = conexion.getContentLength();
-            InputStream is = url.openStream();
-            File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Test");
-            if (!mediaStorageDir.exists()) {
-                if (!mediaStorageDir.mkdirs()) {
-                    return null;
-                }
-            }
-            FileOutputStream fos = new FileOutputStream(mediaStorageDir
-                    + "/q.txt");
-            byte data[] = new byte[1024];
-            long total = 0;
-            int progress = 0;
-            while ((count = is.read(data)) != -1) {
-                total += count;
-                int progress_temp = (int) total * 100 / lenghtOfFile;
-                    /*publishProgress("" + progress_temp); //only for asynctask
-                    if (progress_temp % 10 == 0 && progress != progress_temp) {
-                        progress = progress_temp;
-                    }*/
-                fos.write(data, 0, count);
-            }
-            is.close();
-            fos.close();
-        } catch (Exception e) {
-            Log.e("ERROR DOWNLOADING",
-                    "Unable to download" + e.getMessage());
-        }
 
-        //Find the directory for the SD Card using the API
 
-        File sdcard = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+        //Hard coded cue number for testing
+        double cueNumber = 10.10;
 
-//Get the text file
-        File file = new File(sdcard,"q.txt");
-
-//Read text from file
-        StringBuilder text = new StringBuilder();
-
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                text.append(line);
-                text.append('\n');
-            }
-            br.close();
-        }
-        catch (IOException e) {
-            //You'll need to add proper error handling here
-        }
-
-        String cueNumber = text.toString();
-
+        //Set Cue Number in Card
         card.setText("This is cue: \n\n" + "              " + cueNumber);
         // card.setText(R.string.insert_number);
         return card.getView();
