@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Cue</string>
+    <string name="title_activity_main">Cue Immersion</string>
+    <string name="in_cue">We are in cue: </string>
+
+</resources>
