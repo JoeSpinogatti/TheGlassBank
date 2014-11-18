@@ -13,6 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+
 /**
  * An {@link Activity} showing a tuggable "Hello World!" card.
  * <p/>
@@ -96,11 +103,29 @@ public class MainActivity extends Activity {
     private View buildView() {
         CardBuilder card = new CardBuilder(this, CardBuilder.Layout.TEXT);
 
-        double x = 4.678;
+        InputStream is = getResources().openRawResource(R.raw.q);
+        InputStreamReader inputStreamReader = new InputStreamReader(is);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
-        card.setText("This is cue: \n\n" + "             " + x);
+        try {
+            String inputLine;
+
+            while ((inputLine = bufferedReader.readLine()) !=null) {
+                double x = Double.parseDouble(inputLine);
+                card.setText("This is cue: \n\n" + "             " + x);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (bufferedReader != null) {
+                    bufferedReader.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
         // card.setText(R.string.insert_number);
         return card.getView();
     }
-
 }
