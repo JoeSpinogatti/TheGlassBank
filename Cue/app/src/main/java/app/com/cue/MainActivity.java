@@ -14,17 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.google.gson.Gson;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.List;
-
-
 /**
  * An {@link Activity} showing a tuggable "Hello World!" card.
  * <p/>
@@ -133,8 +122,6 @@ public class MainActivity extends Activity {
     /**
      * What cue is this card.
      */
-
-
 
     private View buildView() {
         CardBuilder card = new CardBuilder(this, CardBuilder.Layout.TEXT);

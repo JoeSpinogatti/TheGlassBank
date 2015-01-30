@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GoToCue</string>
+    <string name="title_activity_main">GoToCue Immersion</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="go_to_cue">Go To Cue</string>
+    <string name="title_activity_cue_result">CueResult Immersion</string>
+
+</resources>
