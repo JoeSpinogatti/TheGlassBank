@@ -9,6 +9,7 @@ import com.google.android.glass.widget.CardScrollView;
 
 import android.app.Activity;
 import android.content.Context;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+
 
 /**
  * An {@link Activity} showing a tuggable "Hello World!" card.
@@ -123,16 +125,23 @@ public class MainActivity extends Activity {
             switch (item.getItemId()) {
                 case R.id.next_cue:
 
+                    NextCue.NextCuePost();
+
                     gotocue("Next Cue");
 
 
                     break;
                 case R.id.previous_cue:
 
+                    PrevCue.PrevCuePost();
+
                     gotocue("Previous Cue");
 
                     break;
+
                 case R.id.cue_number:
+
+                    CueNum.CueNumPost();
 
                     gotocue("Cue Number...");
 
@@ -195,3 +204,5 @@ public class MainActivity extends Activity {
         return false;
     }
 }
+
+

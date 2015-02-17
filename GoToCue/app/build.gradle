@@ -27,5 +27,7 @@ android {
 }
 
 dependencies {
+    compile group:'com.mashape.unirest', name:'unirest-java', version:'1.4.4'
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
 }
