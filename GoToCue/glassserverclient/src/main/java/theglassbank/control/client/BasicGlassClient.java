@@ -15,7 +15,7 @@ public class BasicGlassClient implements GlassClient
     private final WrappedHttpClient httpClient;
 
     /**
-     * Creates a {@code BasicGlassClient} with teh given URL.
+     * Creates a {@code BasicGlassClient} with the given URL.
      *
      * @param url the server's URL.
      * @throws IllegalArgumentException if {@code url} if {@code null} or

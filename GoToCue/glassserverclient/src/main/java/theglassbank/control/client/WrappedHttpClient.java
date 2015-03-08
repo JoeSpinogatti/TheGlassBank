@@ -30,7 +30,7 @@ public class WrappedHttpClient
     }
 
     /**
-     * Sends the given string in teh body of an HTTP post to the server. This
+     * Sends the given string in the body of an HTTP post to the server. This
      * action is done asynchronously. This method is non-blocking.
      *
      * @param body the value that will be added to the body of the post.
