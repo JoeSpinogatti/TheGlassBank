@@ -7,6 +7,7 @@ public class ArgumentUtils
 {
     /**
      * Checks to see if the given {@code object} is {@code null}.
+     *
      * @param object the object to check.
      * @param name the name of the variable. The name will be included in the
      *             exception.

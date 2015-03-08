@@ -138,25 +138,18 @@ public class MainActivity extends Activity {
             Map<String, String> commands = new HashMap<String, String>();
             switch (item.getItemId()) {
                 case R.id.next_cue:
-
                     commands.put("Cue", "Next");
                     gotocue("Next Cue");
-
-
                     break;
                 case R.id.previous_cue:
 
                     commands.put("Cue", "Previous");
                     gotocue("Previous Cue");
-
                     break;
-
                 case R.id.cue_number:
-
-                    //CueNum.CueNumPost();
-
+                    // TODO how do we get the cue number?
+                    commands.put("CueNumber", "1");
                     gotocue("Cue Number...");
-
                     break;
             }
 

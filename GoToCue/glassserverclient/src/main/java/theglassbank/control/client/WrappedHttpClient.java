@@ -18,7 +18,7 @@ public class WrappedHttpClient
     private final String url;
 
     /**
-     * Creates a new {@code WrappedHttpClient} for communicating to an HTTP
+     * Creates a new {@code WrappedHttpClient} for communicating to a HTTP
      * server.
      *
      * @param url the URL of the server.
@@ -30,7 +30,7 @@ public class WrappedHttpClient
     }
 
     /**
-     * Sends the given string in the body of an HTTP post to the server. This
+     * Sends the given string in the body of a HTTP post to the server. This
      * action is done asynchronously. This method is non-blocking.
      *
      * @param body the value that will be added to the body of the post.

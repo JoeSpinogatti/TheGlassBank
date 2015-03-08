@@ -18,7 +18,7 @@ public class BasicGlassClient implements GlassClient
      * Creates a {@code BasicGlassClient} with the given URL.
      *
      * @param url the server's URL.
-     * @throws IllegalArgumentException if {@code url} if {@code null} or
+     * @throws IllegalArgumentException if {@code url} is {@code null} or
      *                                  empty.
      */
     public BasicGlassClient(String url)
