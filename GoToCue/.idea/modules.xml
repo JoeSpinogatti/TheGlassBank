@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/App.iml" filepath="$PROJECT_DIR$/app/App.iml" />
       <module fileurl="file://$PROJECT_DIR$/GoToCue.iml" filepath="$PROJECT_DIR$/GoToCue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/glassserverclient/glassserverclient.iml" filepath="$PROJECT_DIR$/glassserverclient/glassserverclient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testcli/testcli.iml" filepath="$PROJECT_DIR$/testcli/testcli.iml" />
     </modules>
   </component>
 </project>
