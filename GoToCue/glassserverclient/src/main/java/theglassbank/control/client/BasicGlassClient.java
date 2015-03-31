@@ -2,6 +2,9 @@ package theglassbank.control.client;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import theglassbank.control.ArgumentUtils;
 import theglassbank.control.data.GlassAction;
 
@@ -44,6 +47,7 @@ public class BasicGlassClient implements GlassClient
         ArgumentUtils.checkNotNull(action, "action");
 
         // convert the POJO into a JSON string and send it to the server
-        httpClient.performHttpPost(new JSONObject(action).toString());
+        httpClient.performHttpPost(new JSONObject(action.getCommands()).toString());
+
     }
 }
