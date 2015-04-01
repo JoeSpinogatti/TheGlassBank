@@ -1,6 +1,7 @@
-package theglassbank.control.client;
+package control.client;
 
-import theglassbank.control.data.GlassAction;
+
+import control.data.GlassAction;
 
 /**
  * The {@code GlassClient} is responsible to sending commands from a client

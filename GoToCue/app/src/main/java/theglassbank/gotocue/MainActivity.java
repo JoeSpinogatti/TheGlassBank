@@ -23,10 +23,9 @@ import android.widget.AdapterView;
 import java.util.HashMap;
 import java.util.Map;
 
-import theglassbank.control.client.BasicGlassClient;
-import theglassbank.control.client.GlassClient;
-import theglassbank.control.data.BasicAction;
-import theglassbank.control.data.GlassAction;
+import control.client.BasicGlassClient;
+import control.client.GlassClient;
+import control.data.BasicAction;
 
 
 /**

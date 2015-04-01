@@ -26,7 +26,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="glassserverclient" exported="" />
+    <orderEntry type="module" module-name="App" exported="" />
   </component>
 </module>
 

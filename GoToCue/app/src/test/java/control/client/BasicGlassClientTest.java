@@ -1,15 +1,19 @@
-package theglassbank.control.client;
+package control.client;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import theglassbank.control.data.BasicAction;
-import theglassbank.control.data.GlassAction;
+import control.data.BasicAction;
+import control.data.GlassAction;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -61,7 +65,7 @@ public class BasicGlassClientTest
      * Test sending a valid action.
      */
     @Test
-    public void testSendAction()
+    public void testSendAction() throws JSONException
     {
         // data being sent
         String device = "lights";
@@ -72,20 +76,10 @@ public class BasicGlassClientTest
         cmds.put(cmdKey, cmdValue);
         GlassAction action = new BasicAction(device, cmds);
 
-        // for verifying message sent to server
-        ArgumentCaptor<String> argumentCaptor =
-                ArgumentCaptor.forClass(String.class);
-
         // send it
         glassClient.sendAction(action);
 
         // confirm we called the HTTP client
-        verify(mockedHttpClient).performHttpPost(argumentCaptor.capture());
-        String sentString = argumentCaptor.getValue();
-
-        // check for key values in JSON string
-        assertTrue(sentString.contains(device));
-        assertTrue(sentString.contains(cmdKey));
-        assertTrue(sentString.contains(cmdValue));
+        verify(mockedHttpClient).performHttpPost(any(JSONObject.class));
     }
 }

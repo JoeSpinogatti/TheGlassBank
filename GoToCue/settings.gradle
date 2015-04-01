@@ -1,1 +1,1 @@
-include ':App', ':glassserverclient', ':testcli'
+include ':App', ':testcli'

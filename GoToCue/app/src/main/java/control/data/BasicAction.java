@@ -1,8 +1,8 @@
-package theglassbank.control.data;
+package control.data;
 
 import java.util.Map;
 
-import theglassbank.control.ArgumentUtils;
+import control.ArgumentUtils;
 
 /**
  * A basic implementation of the {@code GlassAction} interface.

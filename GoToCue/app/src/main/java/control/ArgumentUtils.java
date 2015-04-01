@@ -1,4 +1,4 @@
-package theglassbank.control;
+package control;
 
 /**
  * Contains helper method for validating method arguments.

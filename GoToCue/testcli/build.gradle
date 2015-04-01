@@ -3,7 +3,7 @@ apply plugin: 'application'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar']),
-            project(':glassserverclient')
+    project(':App')
 }
 
-mainClassName = "theglassbank.control.Driver"
+mainClassName = "theglassbank.control.client.Driver"

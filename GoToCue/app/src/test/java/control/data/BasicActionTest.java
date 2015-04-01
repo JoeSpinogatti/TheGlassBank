@@ -1,4 +1,4 @@
-package theglassbank.control.data;
+package control.data;
 
 import org.junit.Test;
 
