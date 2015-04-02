@@ -56,6 +56,7 @@ public class MainActivity extends Activity {
 
     //private final GlassClient glassClient =
     //        new BasicGlassClient("http://posttestserver.com/post.php?dir=glass");
+    // change this IP for the server
     private final GlassClient glassClient =
             new BasicGlassClient("http://150.212.231.152:1337/");
 
@@ -150,6 +151,8 @@ public class MainActivity extends Activity {
                     break;
                 case R.id.cue_number:
                     // TODO how do we get the cue number?
+                    // call you voice method, get the number
+                    // int cueNumber = yourMethod
                     commands.put("CueNumber", "1");
                     gotocue("Cue Number...");
                     break;
