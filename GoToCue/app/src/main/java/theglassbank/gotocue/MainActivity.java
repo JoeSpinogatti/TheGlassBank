@@ -53,8 +53,11 @@ public class MainActivity extends Activity {
     private View mView;
 
     // TODO: What do we use for the server's URL?
+
+    //private final GlassClient glassClient =
+    //        new BasicGlassClient("http://posttestserver.com/post.php?dir=glass");
     private final GlassClient glassClient =
-            new BasicGlassClient("http://posttestserver.com/post.php?dir=glass");
+            new BasicGlassClient("http://150.212.231.152:1337/");
 
     @Override
     protected void onCreate(Bundle bundle) {
