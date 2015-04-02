@@ -1,6 +1,10 @@
 package control.client;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Map;
+import java.util.Set;
 
 import control.ArgumentUtils;
 import control.data.GlassAction;
@@ -44,8 +48,24 @@ public class BasicGlassClient implements GlassClient
     {
         ArgumentUtils.checkNotNull(action, "action");
 
+        JSONObject json = new JSONObject();
+        try
+        {
+            json.put("device", action.getDevice());
+            Map<String, String> cmds = action.getCommands();
+            for(Map.Entry<String, String> entry : cmds.entrySet())
+            {
+                json.put(entry.getKey(), entry.getValue());
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+
         // convert the POJO into a JSON string and send it to the server
-        httpClient.performHttpPost(new JSONObject(action.getCommands()));
+        httpClient.performHttpPost(json);
 
     }
 }
