@@ -1,15 +1,21 @@
 package theglassbank.control.client;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
-
-import control.client.BasicGlassClient;
-import control.client.GlassClient;
-import control.data.BasicAction;
-import control.data.GlassAction;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -23,6 +29,45 @@ public class Driver
     private final BufferedReader reader =
             new BufferedReader(new InputStreamReader(System.in));
 
+    public void performHttpPost(JSONObject jsonObject)
+    {
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost("http://127.0.0.1:1337");
+
+        StringEntity input = null;
+        try
+        {
+            input = new StringEntity(jsonObject.toString());
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+            return;
+        }
+        input.setContentType("application/json");
+        post.setEntity(input);
+
+
+        /*
+        post.addHeader("accept", "application/json");
+        List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+        System.out.println("Sending " +jsonObject.toString());
+        pairs.add(new BasicNameValuePair("commands", jsonObject.toString()));
+        */
+        //post.setEntity(new UrlEncodedFormEntity(pairs));
+        post.setEntity(input);
+
+        try
+        {
+            client.execute(post);
+        }
+        catch (IOException e)
+        {
+            throw new IllegalArgumentException(e);
+        }
+        client.getConnectionManager().shutdown();
+    }
+
     /**
      * Starts the driver. The user will be prompted for input which will then
      * be forwarded to the server.
@@ -33,11 +78,8 @@ public class Driver
     public void startDriver() throws IOException
     {
         // get the URL of the server we are talking to.
-        System.out.println("Enter the URL of the Glass Server: ");
-        String url = reader.readLine();
-
-        // create the server
-        GlassClient server = new BasicGlassClient(url);
+        //System.out.println("Enter the URL of the Glass Server: ");
+        //String url = reader.readLine();
 
         // keep asking for information to create objects
         while(true)
@@ -46,13 +88,13 @@ public class Driver
 
             // the name of the device being controlled by the server
             // (ION, Sound Console, etc)
-            System.out.print("Enter the device: ");
-            String device = reader.readLine();
-            System.out.println();
+            //System.out.print("Enter the device: ");
+            //String device = reader.readLine();
+            //System.out.println();
 
             // get all off the commands that should be sent.
-            Map<String, String> map = new HashMap<String, String>();
             boolean run = true;
+            JSONObject jsonObject = new JSONObject();
             while(run)
             {
                 System.out.print("Enter in the key for a command (e.g. " +
@@ -68,13 +110,17 @@ public class Driver
                 System.out.print("Enter the value for the command (e.g. \"Next\"): ");
                 String value = reader.readLine();
                 System.out.println();
-                map.put(key, value);
+                try
+                {
+                    jsonObject.put(key, value);
+                } catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
             }
 
             // create the object and send it
-            GlassAction action = new BasicAction(device, map);
-            System.out.println("Sending the following: " + action);
-            server.sendAction(action);
+            performHttpPost(jsonObject);
         }
     }
 

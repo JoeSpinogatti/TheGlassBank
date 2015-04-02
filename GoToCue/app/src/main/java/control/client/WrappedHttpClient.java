@@ -7,6 +7,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
@@ -59,6 +60,33 @@ public class WrappedHttpClient
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
 
+        StringEntity input = null;
+        try
+        {
+            input = new StringEntity(jsonObject.toString());
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+            return;
+        }
+        input.setContentType("application/json");
+        post.setEntity(input);
+
+        try
+        {
+            client.execute(post);
+        }
+        catch (IOException e)
+        {
+            throw new IllegalArgumentException(e);
+        }
+        client.getConnectionManager().shutdown();
+
+        /*
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
         List<NameValuePair> pairs = new ArrayList<NameValuePair>();
         pairs.add(new BasicNameValuePair("commands", jsonObject.toString()));
         try
@@ -77,5 +105,6 @@ public class WrappedHttpClient
         {
             throw new IllegalArgumentException(e);
         }
+        */
     }
 }
